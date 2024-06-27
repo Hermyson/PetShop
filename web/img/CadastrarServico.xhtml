@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <h:head>
+
+        <title>Cadastro de Serviço</title>
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+        </style>
+    </h:head>
+
+    <h:body styleClass="body">
+        <div class="divGeral"> 
+
+
+
+            <!--Include do menu na página-->
+            <ui:include src="menuGeral.xhtml" />
+
+            <h:form id="formCadastroCliente">
+                <p:panel header="Cadastro de Servico">
+                    <p:tabView id="tabServico">
+                        <!--<p:growl id="messages" showDetail="true"/>-->
+
+                        <p:tab id="tab1" title="DADOS SERVIÇO " >
+
+                            <h:panelGrid id="panelGrid" columns="1" cellpadding="1" >
+                                <h:outputLabel value="Nome Animal"/>  
+                                <p:inputText value="" id="nome" size="40" disabled=""/>
+                                
+                                <h:outputText value="Tipo De Serviço" />
+                                <p:selectOneMenu value="">
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItem itemLabel="Banho" itemValue="Banho"/>
+                                    <f:selectItem itemLabel="Tosa" itemValue="Tosa"/>
+                                    <f:selectItem itemLabel="Banho e Tosa" itemValue="Banho e Tosa"/>
+                                </p:selectOneMenu>
+                                
+                                <h:outputText value="Valor Do Serviço " />
+                                <p:inputText value="" styleClass="" title="" size="15"/>
+                                
+                                <h:outputText value="Data Nascimento"/>
+                                <p:calendar value="" size="10">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+
+                              
+                            </h:panelGrid>
+                        </p:tab>
+
+                    </p:tabView>
+                    <p:separator/>
+                    <p:commandButton value="Cadastrar " action=""
+                                     icon="ui-icon-disk"  oncomplete="location.href'CadastrarAnimal.xhtml'" />
+                </p:panel>
+            </h:form>
+
+
+
+        </div>
+    </h:body>   
+
+
+</html>

@@ -1,0 +1,80 @@
+/*
+Cetralizar a página deixando uma margem livre aos lados
+===================*/
+body{margin: 0; padding: 0;}
+.pai{position: absolute; width: 80%; left: 50%; margin-left: -40%;}
+.layoutCabecalho img{height: 100%; vertical-align: central;}
+.layoutCentro img {height: 20%}
+.corpo{position: absolute; width: 80%; left: 50%; margin-left: -40%; background-color: white; padding: 2%;}
+.divGeral{position: absolute; width: 80%; left: 50%; margin-left: -40%; padding: 1%; background: #FFFFFF;}
+.body{background-color: beige;}
+/*
+Retira o sobrinhado dos links e borda das imagens com link
+======================================*/
+a{text-decoration: none;}
+img{border: 0px;}
+
+
+.panelGrid{margin-top: -1%; width: 100% !important;}
+
+/*
+Apresenta as Unidades Federativas e as Cidades
+=============================================================================*/
+.apresentaCidade, .apresentaUF{position: absolute; width: 50%; left: 50%; margin-left: -25%; margin-top: -0.5% !important; padding: 0;}
+.tableUF tr:hover{color: red; cursor: default; background-color: #99cc00;}
+.tableApresentaCidade tr:hover{color: red; cursor: default; background-color: #99cc00;}
+
+
+/*
+Página referente as Funcionario ou Usuário
+=============================================================================*/
+.divFuncionario{position: absolute; width: 80%; left: 50%; margin-left: -40%; padding: 1%; background: #FFFFFF;}
+.inputEmail, .inputNome{width: 60%;}//inpu nome e e-mail largura
+.inputEnd{width: 190%;}//inpu nome e e-mail largura
+
+/*
+Página referente ao Fonecedor
+=============================================================================*/
+.divFornecedor{position: absolute; width: 80%; left: 50%; margin-left: -40%; padding: 1%; background: #FFFFFF;}
+
+
+
+/*
+rodapé da página
+=============================================================================*/
+.rodaPe{text-align: center; background-color: red;}
+.rodaPe{position: relative; width: 103.4%; margin-bottom: -3.4% !important; margin-left: -1.7% !important; height: 2%;}
+
+
+
+
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;
+}
+
+
+.ui-panelgrid td,.ui-panelgrid tr {
+    border-style: none !important
+}
+
+.ui-widget {
+    font-size: 11px !important;
+}
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+    float: right;
+}
+
+body {
+
+}
+
+.ui-dialog, .ui-dialog-titlebar, .ui-dialog-title-dialog, .ui-dialog-titlebar-close, .ui-dialog-content, .ui-widget-content{
+    background-color: blue;
+}
+
+* {
+    font-size: 11px;
+
+}

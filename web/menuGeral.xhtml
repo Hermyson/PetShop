@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">
+            h2{font-size:35px}
+            h2{font-family:monospace ,cursive}
+
+            .itemMenor{font-size: small;}
+            /*            .imgAvore{height: 10%; float: right; padding: 0;  margin-top: -3.5%;}*/
+            .imgLogo{height: 80px; float: left; padding: 0;  margin-top: -3.5%;}
+            .topImg{height: 50px; text-align: start; margin-top: 5%;}
+        </style>
+
+    </h:head>
+    <h:body>
+
+
+            <h:form id="formMenu">  
+                <p:graphicImage styleClass="imgLogo"  url="../img/Pet 1.png" />
+                <div class="topImg">
+
+
+                    <h2>Sistema Pet Shop </h2>
+
+                </div>
+                <p:menubar>    
+                    <p:menuitem value="Home" url="index.xhtml"/>  
+
+                    <p:submenu label="Cadastro"> 
+                        <p:menuitem styleClass="itemMenor" value="Cliente" url="CadastrarCliente.xhtml"/>
+                        <p:menuitem styleClass="itemMenor" value="Animal" url="CadastrarAnimal.xhtml"/>  
+
+                    </p:submenu>  
+
+                    <p:submenu label="Serviço">  
+                        <p:menuitem styleClass="itemMenor" value="Agendamento" url="CadastrarAnimal.xhtml"/>
+                        <p:menuitem styleClass="itemMenor" value="Serviço" url="CadastrarAnimal.xhtml"/>  
+                        <p:menuitem styleClass="itemMenor" value="Serviço Concluido" url="CadastrarAnimal.xhtml"/>  
+
+                    </p:submenu> 
+
+                    <p:submenu label="Consulta">  
+                        <p:menuitem value="Animal" styleClass="itemMenor"  url="index.xhtml"/>
+                        <p:menuitem value="Serviço Realizado" styleClass="itemMenor"  url="index.xhtml"/>  
+
+                    </p:submenu>
+                    <c:if test="#{contLog.login.acesso}">
+                        <f:facet name="options">
+                            <strong style="color: black;">                            
+                                <h:outputText value="Usuário: #{contLog.login.usuario}     |  " />
+                                <p:commandButton value="Sair" actionListener="#{contLog.sair()}" 
+                                                 onclick="redirecionar('user/logar.xhtml')" icon="ui-icon-close" style="font-size: small;" />
+
+                            </strong>
+                        </f:facet>
+                    </c:if>
+                </p:menubar> 
+            </h:form>
+    </h:body>
+</html>
+

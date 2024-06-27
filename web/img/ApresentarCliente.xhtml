@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+         <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+        </style>
+    </h:head>
+
+
+    <h:body styleClass="body">
+        <div class="divGeral"> 
+            <!--        <c:choose>
+            -->                      
+
+
+            <!--Include do menu na página-->
+<!--            <ui:include src="menuGeral.xhtml" />-->
+        <h:form id="form">
+                <p:dataTable  id="tableFornecedor" styleClass="tableUF" resizableColumns="true" draggableColumns="true" rowsPerPageTemplate="8,15,30,60,100"                          
+                              value="#{contFornecedor.recuperaTodosFornecedores()}" var="fornecedor" rowKey="#{fornecedor.codigo}" paginator="true" rows="8">
+                    <p:column width="100">
+                        <p:commandButton style="width: 40px; font-size: small;" title="Visualizar dados do Fornecedor"
+                                         oncomplete="panelVisualizar.show()"  icon="ui-icon-search" update=":form:dialVisualizar">
+                            <f:setPropertyActionListener value="#{fornecedor}" target="#{contFornecedor.selectFornecedor}" /> 
+                        </p:commandButton>
+                        
+                        <p:commandButton disabled="false" title="Alterar dados do Fornecedor"
+                                         oncomplete="location.href='alterarFornecedor.xhtml'" icon="ui-icon-refresh" style="font-size: small;">
+                            <f:setPropertyActionListener value="#{fornecedor}" target="#{contFornecedor.selectFornecedor}" /> 
+                        </p:commandButton>
+                        
+                        <p:commandButton oncomplete="panelDeletar.show()" title="Excluir Fornecedor"
+                                         icon="ui-icon-trash" update=":form:dialDeletar" style="font-size: small;">
+                            <f:setPropertyActionListener value="#{fornecedor}" target="#{contFornecedor.selectFornecedor}" /> 
+                        </p:commandButton>
+                    </p:column>
+<!--                    <p:column sortBy="#{fornecedor.codigo}" filterBy="#{fornecedor.codigo} " width="110" >
+                        <f:facet name="header">
+                            Codigo
+                        </f:facet>                        
+                        <h:outputText value="#{fornecedor.codigo}"/>
+                    </p:column> -->
+
+                    <p:column sortBy="#{fornecedor.nome}" filterBy="#{fornecedor.nome}">
+                        <f:facet name="header">
+                            Nome
+                        </f:facet>
+                        <h:outputText value="#{fornecedor.nome}"/>
+                    </p:column> 
+                    <p:column sortBy="#{fornecedor.cnpj}" filterBy="#{fornecedor.cnpj}">
+                        <f:facet name="header">
+                            CNPJ
+                        </f:facet>
+                        <h:outputText value="#{fornecedor.cnpj}"/>
+                    </p:column>                
+                    <p:column sortBy="#{fornecedor.email}" filterBy="#{fornecedor.email}">
+                        <f:facet name="header">
+                            E-MAIL
+                        </f:facet>
+                        <h:outputText value="#{fornecedor.email}"/>
+                    </p:column>
+                </p:dataTable>
+
+
+
+
+                <p:dialog id="dialDeletar" header="Deletar" widgetVar="panelDeletar" resizable="false"  
+                          showEffect="explode" hideEffect="explode">
+                    <h:outputText value="Está certo que vai deletar o fornecedor:" style="font-weight: bolder;" />
+                    <h:outputLabel value="#{contFornecedor.selectFornecedor.nome}" />
+                    <p:separator />
+                    <p:commandButton value="Deletar" action="#{contFornecedor.excluirFornecedor(contFornecedor.selectFornecedor)}" icon="ui-icon-trash" 
+                                     oncomplete="panelDeletar.hide()" update="tableFornecedor" />
+                    <p:commandButton value="Cancelar" oncomplete="panelDeletar.hide()" />
+                </p:dialog>
+
+                <p:dialog id="dialVisualizar" header="Fornecedor" widgetVar="panelVisualizar" resizable="true" closable="true"  modal="true"
+                          showEffect="explode" hideEffect="explode">
+                    <h:outputText value="CÓDIGO DO FORNECEDOR: #{contFornecedor.selectFornecedor.codigo}" /><br />
+                    <h:outputText value="FORNECEDOR: #{contFornecedor.selectFornecedor.nome}" /><br />
+                    <h:outputText value="CNPJ: #{contFornecedor.selectFornecedor.cnpj}" /><br />
+                    <h:outputText value="E-MAIL: #{contFornecedor.selectFornecedor.email}" /><br />
+                    <h:outputText value="CÓDIGO DO ENDEREÇO: #{contFornecedor.selectFornecedor.endereco.codigo}" /><br />
+                    <h:outputText value="LOGRADOURO: #{contFornecedor.selectFornecedor.endereco.logradouro} Nº: #{contFornecedor.selectFornecedor.endereco.numero}" /><br />
+                    <h:outputText value="CEP: #{contFornecedor.selectFornecedor.endereco.cep}" /><br />
+                    <h:outputText value="BAIRRO: #{contFornecedor.selectFornecedor.endereco.bairro}" /><br />
+                    <h:outputText value="CIDADE: #{contFornecedor.selectFornecedor.endereco.cidade.nome} UF: #{contFornecedor.selectFornecedor.endereco.cidade.uf.uf}" /><br />
+                </p:dialog>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

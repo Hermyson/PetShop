@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"   
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head>
+        <title>Facelet Title</title>        
+    </h:head>
+
+      
+    <style type="text/css">
+
+        body {
+
+            margin-left: 36%;
+
+            margin-right: 36%;
+
+            margin-top: 20%;
+
+            padding: 10px 10px 10px 10px;
+
+            font-family: sans-serif;
+
+        }
+
+    </style>
+    <h:body>
+
+
+        <h:panelGrid>
+
+            <p:messages />
+
+            <h:form >
+
+                <p:panel  header="Login">
+
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Login: " />
+                        <h:inputText id="j_username" maxlength="30" value="#{login.login}"/>
+                        <h:outputText value="Senha: " />
+                        <h:inputSecret id="j_password" maxlength="30" value="#{login.login}"/>
+                    </h:panelGrid>
+                    <p:commandButton id="btnLogin" value="Entrar" action="#{login.autenticar}" type="submit"/>
+
+                </p:panel>
+
+            </h:form>
+
+        </h:panelGrid>
+
+    </h:body>
+
+</html>
+

@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <h:head>
+
+        <title>Cadastro de Animal</title>
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+        </style>
+    </h:head>
+
+
+    <h:body styleClass="body">
+        <div class="divGeral"> 
+
+            <!--Include do menu na página-->
+            <ui:include src="menuGeral.xhtml" />
+
+            <h:form id="formCadastroDeAnimal">
+                <p:panel header="Cadastro de Animais">
+                    <p:tabView id="tabAnimal">
+                        <!--<p:growl id="messages" showDetail="true"/>-->
+
+
+
+                        <p:tab id="tab3" title=" DADOS DO ANIMAL">
+                            <p:growl id="gr" sticky="true" showDetail="true" life="5000" autoUpdate="true"/>
+                            <p:fieldset legend="cadastro de Animal" id="field" toggleSpeed="5000" toggleable="true">
+                            <p:row>
+                                <h:panelGrid columns="1" cellpadding="1">
+                                    <h:outputText value="Nome Animal:"/>
+                                    <p:inputText value="#{animal.nome_Animal}" id="nomeAnimal" size="40" disabled=""/>
+
+                                    <h:outputText value="Sexo" />
+                                    <p:selectOneMenu value="#{animal.sexo}">
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItem itemLabel="Macho" itemValue="Macho"/>
+                                        <f:selectItem itemLabel="Fêmea" itemValue="Fêmea"/>
+                                    </p:selectOneMenu>
+
+                                    <h:outputText value="Tipo" />  
+                                    <p:selectOneMenu value="#{animal.tipo}">
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItem itemLabel="Cachorro(a)" itemValue="Cachorro"/>
+                                        <f:selectItem itemLabel="Gato(a)" itemValue="Gato"/>
+                                    </p:selectOneMenu>
+
+                                    <h:outputText value="Data Nascimento"/>
+                                    <p:calendar value="#{animal.dtNascimento}" size="10">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:calendar>
+
+                                    <h:outputLabel value="Raça"/>
+                                    <p:inputText value="#{animal.raca}" id="Raca" size="40"/>
+
+                                    <h:outputLabel value="Observação:"/>  
+                                    <p:inputTextarea rows="5" cols="30"  value="#{animal.observacao}"/>
+
+                                </h:panelGrid>
+                                <p:commandButton value="Cadastrar " action="#{controladorAnimal.adicionar(animal)}" icon="ui-icon-disk" oncomplete="location.href='apresentarClienteCadastrado.xhtml'"/>
+                                <p:commandButton value="Cancelar" onclick="location.href = 'index.xhtml'"  icon="ui-icon-close">  
+                                    <p:confirm header="Cancelar" message="Deseja cancelar?" icon="ui-icon-alert" />  
+                                </p:commandButton>  
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" > 
+                                    <div style="text-align: center;">
+                                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                    </div>
+                                </p:confirmDialog> 
+                            </p:row>
+                            </p:fieldset>
+                        </p:tab>                            
+                    </p:tabView>
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>   
+</html>

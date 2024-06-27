@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Visualizar Serviço Realizado</title>
+
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+
+        </style>
+    </h:head>
+    <h:body styleClass="body">
+        <div class="divGeral">
+            <ui:include src="menuGeral.xhtml" />
+            <h:form id="form">
+                <p:dataTable  id="tableServico" resizableColumns="true" draggableColumns="true" rowsPerPageTemplate="8,15,30"                          
+                              value="#{controladorServico.recuperarTodos()}" var="servico" rowKey="#{servico.codigo}" paginator="true" rows="8">
+                    <p:column width="100">
+                        <p:menuButton value="Opções">
+                            <p:commandButton style="width: 40px; font-size: small;" title="Visualizar dados do Servico"
+                                             oncomplete="panelVisualizar.show()"  icon="ui-icon-search" update=":form:dialVisualizar">
+                            </p:commandButton>
+
+                            <p:commandButton disabled="false" title="Alterar dados do Servico"
+                                             oncomplete="location.href='.xhtml'" icon="ui-icon-refresh" style="font-size: small;">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{controladorCliente.alterarCliente(cliente)}" /> 
+                            </p:commandButton>
+
+                            <p:commandButton oncomplete="panelDeletar.show()" title="Excluir Servico"
+                                             icon="ui-icon-trash" update=":form:dialDeletar" style="font-size: small;">
+                                <f:setPropertyActionListener value="#{controladorCliente}" target="" /> 
+                            </p:commandButton>
+                        </p:menuButton>
+                    </p:column>
+
+
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            Nome Proprietario
+                        </f:facet>
+                        <h:outputText value="#{controladorCliente.selectedC.nome}"/>
+                    </p:column> 
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            Nome Animal
+                        </f:facet>
+                        <h:outputText value="#{controladorCliente.selectedAnimal.nome_Animal}"/>
+                    </p:column> 
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            Data Serviço
+                        </f:facet>
+                        <h:outputText value="#{servico.data_Servico}"/>
+                    </p:column>                
+                    <p:column sortBy="" filterBy="}">
+                        <f:facet name="header">
+                            Tipo Serviço
+                        </f:facet>
+                        <h:outputText value="#{servico.tipo_Servico}"/>
+                    </p:column>
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            Valor
+                        </f:facet>
+                        <h:outputText value=" #{servico.valor}"/>
+                    </p:column>                
+                </p:dataTable>
+                <p:dialog id="dialDeletar" header="Deletar" widgetVar="panelDeletar" resizable="false"  
+                          showEffect="explode" hideEffect="explode">
+                    <h:outputText value="Está certo que vai deletar o serviço:" style="font-weight: bolder;" />
+                    <h:outputLabel value="" />
+                    <p:separator />
+                    <p:commandButton value="Deletar" action="#{controladorServico.deletar(servico)}" icon="ui-icon-trash" 
+                                     oncomplete="panelDeletar.hide()" update="tableServico" />
+                    <p:commandButton value="Cancelar" oncomplete="panelDeletar.hide()" />
+                </p:dialog>
+
+                <p:dialog id="dialVisualizar" header="Serviço Realizado" widgetVar="panelVisualizar" resizable="true" closable="true"  modal="true"
+                          showEffect="explode" hideEffect="explode">
+                    <p:dataTable>
+                        <p:column>
+                            <h:outputText value="Nome Cliente:#{controladorCliente.selectedC.nome} " /><br />
+                            <h:outputText value="Nome animal:#{controladorCliente.selectedAnimal.nome_Animal}  " /><br />
+                            <h:outputText value="Data Serviço: #{controladorServico.recuperar(servico)} " /><br />
+                            <h:outputText value="Valor: #{controladorServico.recuperar(valor)} " /><br />
+                        </p:column>
+                    </p:dataTable>
+                </p:dialog>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
+
+
+

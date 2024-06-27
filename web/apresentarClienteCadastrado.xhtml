@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Apresentar Cliente Cadastrado</title>
+
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+
+        </style>
+    </h:head>
+    <h:body styleClass="body">
+        <div class="divGeral">
+            <ui:include src="menuGeral.xhtml" />
+            <h:form id="form">
+                <p:dataTable  id="tableCliente" styleClass="" resizableColumns="true" draggableColumns="true" rowsPerPageTemplate="8,15,30"                          
+                              value="#{controladorCliente.recuperaTodos()}" var="cliente" rowKey="#{cliente.codigo_Cliente}" paginator="true" rows="8">
+                    <p:ajax event="rowSelect" update=":form:tabelaAnimal"/>
+                    <f:facet name="header">
+                        LISTA DE CLIENTES
+                    </f:facet>
+                    <p:column width="110">
+                        <f:facet name="header">
+                            <p:commandButton value="NOVO" oncomplete="loction.href='CadastrarCliente.xhtml'" icon="ui-icon-person" style="font-size: small;"/>
+                        </f:facet>
+                        <p:menuButton value="Opção" style="font-size: small;">
+                            <p:menuitem value="Visualizar Animais" oncomplete="panelAnimal.show()" update=":form:tabelaAnimal" icon="ui-icon-search">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{controladorCliente.selectedC}" /> 
+                            </p:menuitem>
+                            <p:menuitem value="Cadastrar Animal" onclick="window.location.href = 'CadastrarAnimal.xhtml'" icon="ui-icon-disk">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{controladorCliente.selectedC}" /> 
+                            </p:menuitem>
+                            <p:separator />
+                            <p:menuitem value="Visualizar Cliente" update=":form:dialVisualizar" icon="ui-icon-search" oncomplete="panelVisualizar.show()">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{controladorCliente.selectedC}" /> 
+                            </p:menuitem>
+                            <p:menuitem value="Atualizar Cliente" disabled="false" title="Alterar dados do Cliente"
+                                        oncomplete="location.href='alterarCliente.xhtml'" icon="ui-icon-refresh">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{controladorCliente.selectedC}" /> 
+                            </p:menuitem>
+                            <p:menuitem value="Remover Cliente"  oncomplete="panelDeletar.show()" title="Excluir Cliente"
+                                        icon="ui-icon-trash" update=":form:dialDeletar">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{controladorCliente.selectedC}" /> 
+                            </p:menuitem>
+                        </p:menuButton>                        
+                    </p:column>
+
+
+                    <p:column sortBy="" filterBy="#{cliente.nome}" >
+                        <f:facet name="header">
+                            Nome
+                        </f:facet>
+                        <h:outputText value="#{cliente.nome}"/>
+                    </p:column> 
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            Telefone
+                        </f:facet>
+                        <h:outputText value="#{cliente.telefone}"/>
+                    </p:column> 
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            Telefone Celular
+                        </f:facet>
+                        <h:outputText value="#{cliente.telefoneCelular}"/>
+                    </p:column>                
+                    <p:column sortBy="" filterBy="">
+                        <f:facet name="header">
+                            E-MAIL
+                        </f:facet>
+                        <h:outputText value="#{cliente.email}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+                <!-- Janela para visualizar animal selecionado no menu opção da tabela-->
+                <p:dialog id="diaAnimal" header="Animais de #{controladorCliente.selectedC.nome}" widgetVar="panelAnimal" resizable="false"  
+                          showEffect="explode" hideEffect="explode" closable="true" modal="true">
+                    <p:dataTable id="tabelaAnimal" value="#{controladorCliente.selectedC.animais}" var="animal" rowKey="#{animal.codigo_Animal}"
+                                 widgetVar="tabani">
+                        <p:column>
+                            <p:menuButton value="Opção" style="font-size: small;">
+                                <p:menuitem value="Visualizar Animais" oncomplete="panelAnimal.show()" update=":form:tabelaAnimal" icon="ui-icon-search">
+                                    <f:setPropertyActionListener value="#{animal}" target="#{controladorCliente.selectedAnimal}" /> 
+                                </p:menuitem>
+                                <p:menuitem value="Cadastrar Serviço" onclick="window.location.href = 'CadastrarServico.xhtml'" icon="ui-icon-disk">
+                                    <f:setPropertyActionListener value="#{animal}" target="#{controladorCliente.selectedAnimal}" /> 
+                                </p:menuitem>
+                                <p:separator />
+                                <p:menuitem value="Visualizar Cliente" update=":form:dialVisualizar" icon="ui-icon-search" oncomplete="panelVisualizar.show()">
+                                    <f:setPropertyActionListener value="#{animal}" target="#{controladorCliente.selectedAnimal}" /> 
+                                </p:menuitem>
+                                <p:menuitem value="Atualizar Cliente" disabled="false" title="Alterar dados do Cliente"
+                                            oncomplete="location.href='alterarCliente.xhtml'" icon="ui-icon-refresh">
+                                    <f:setPropertyActionListener value="#{animal}" target="#{controladorCliente.selectedAnimal}" /> 
+                                </p:menuitem>
+                                <p:menuitem value="Remover Cliente"  oncomplete="panelDeletar.show()" title="Excluir Cliente"
+                                            icon="ui-icon-trash" update=":form:dialDeletar">
+                                    <f:setPropertyActionListener value="#{animal}" target="#{controladorCliente.selectedAnimal}" /> 
+                                </p:menuitem>
+                            </p:menuButton> 
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{animal.nome_Animal}"/>
+                        </p:column>
+                        <p:column headerText="Raça">
+                            <h:outputText value="#{animal.raca}"/>
+                        </p:column>
+                        <p:column headerText="Sexo">
+                            <h:outputText value="#{animal.sexo}"/>
+                        </p:column>
+                        <p:column headerText="Data de nascimento">
+                            <h:outputText value="#{animal.dtNascimento}"/>
+                        </p:column>
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{animal.tipo}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:dialog>
+
+
+                <p:dialog id="dialDeletar" header="Deletar" widgetVar="panelDeletar" resizable="false" modal="true"  
+                          showEffect="explode" hideEffect="explode">
+                    <h:outputLabel value="Está certo que vai deletar o cliente:" style="font-weight: bolder;" /><br />
+                    #{controladorCliente.selectedC.nome}
+                    <p:separator />
+                    <div style="text-align: center;">
+                        <p:commandButton value="Deletar" action="#{controladorCliente.excluirCliente(controladorCliente.selectedC)}" icon="ui-icon-trash" 
+                                         oncomplete="panelDeletar.hide()" update="tableCliente,tabelaAnimal" />
+                        <p:commandButton value="Cancelar" oncomplete="panelDeletar.hide()" />
+                    </div>
+                </p:dialog>
+
+                <!--Este dialog é usado para visualizar os dados do cliente-->
+                <p:dialog id="dialVisualizar" header="Cliente" widgetVar="panelVisualizar" resizable="true" closable="true"  modal="true"
+                          showEffect="explode" hideEffect="explode">
+                    <h:outputText value="CÓDIGO DO CLIENTE:#{controladorCliente.selectedC.codigo_Cliente}" />
+                    <br />
+                    <h:outputText value="CLIENTE:#{controladorCliente.selectedC.nome}" /><br />
+                    <h:outputText value="TELEFONE:#{controladorCliente.selectedC.telefone}" /><br />
+                    <h:outputText value ="TELEFONE CELULAR: #{controladorCliente.selectedC.telefoneCelular}" /><br />
+                    <h:outputText value="E-MAIL: #{controladorCliente.selectedC.email}" /><br />
+                    <h:outputText value="LOGRADOURO: #{controladorCliente.selectedC.endereco.logradouro}  
+                                  Nº: #{controladorCliente.selectedC.endereco.numero}" /><br />
+                    <h:outputText value="CEP: #{controladorCliente.selectedC.endereco.cep}" /><br />
+                    <h:outputText value="BAIRRO: #{controladorCliente.selectedC.endereco.bairro}" /><br />
+                    <h:outputText value="CIDADE: #{controladorCliente.selectedC.endereco.cidade} UF: #{controladorCliente.selectedC.endereco.uf}" /><br />
+                </p:dialog>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

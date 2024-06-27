@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head>
+
+        <title>Cadastro de Cliente</title>
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+        </style>
+    </h:head>
+
+    <h:body styleClass="body">
+        <div class="divGeral"> 
+
+            <!--Include do menu na página-->
+            <ui:include src="menuGeral.xhtml" />
+           
+            <h:form id="formCadastroCliente">
+                <p:panel header="Cadastro de Cliente">
+                    <p:tabView id="tabCiente">
+                        <p:tab  id="tab1" title=" DADOS PROPRIETARIO  " >
+                            <p:growl id="gr" sticky="true" showDetail="true" life="5000" autoUpdate="true"/>
+                            <p:fieldset legend="cadastro de Cliente" id="field" toggleSpeed="5000" toggleable="true">
+                               
+                                <h:panelGrid id="panelGrid" columns="1" cellpadding="1" summary="2">
+                                    <h:outputLabel value="Nome proprietario"/>  
+                                    <p:inputText value="#{cliente.nome}" id="nome" size="40" disabled="" required="true" requiredMessage="Coloca o nome completo"/>
+                                    <h:outputText value="Logradouro: " />
+                                    <p:inputText value="#{cliente.endereco.logradouro}" styleClass="inputEnd" title="Endereço residente" size="50" required="true" requiredMessage="Ficou faltando o endereço"/>
+                                    <h:outputText value="Bairro: " />
+                                    <p:inputText value="#{cliente.endereco.bairro}" styleClass="inputEnd" title="Bairro" size="30" required="true" requiredMessage="Ficou faltando o bairro"/>
+
+                                    <h:outputText value="Nº " />
+                                    <p:inputText value="#{cliente.endereco.numero}" size="5" styleClass="inputNum" title="Número de sua residencia" required="true" requiredMessage="Ficou faltando o nº"/>
+                                    <h:outputText  value="Cidade: " title="Cidade"/>
+                                    <p:inputText value="#{cliente.endereco.cidade}" styleClass="inputEnd" title="Cidade" size="50" required="true" requiredMessage="Ficou faltando a cidade" />
+
+                                    <h:outputText value="UF:" title="Unidade Federativa" />
+                                    <p:inputText value="#{cliente.endereco.uf}" styleClass="inputEnd" title="UF" size="2" required="true" requiredMessage="Ficou faltando UF"/>
+                                    <h:outputLabel value="CEP:"/>  
+                                    <p:inputMask mask="99999-999" value="#{cliente.endereco.cep}" size="6" required="true" requiredMessage="Ficou faltando o cep"/> 
+                                </h:panelGrid>
+                                   
+                            </p:fieldset>
+                        </p:tab>
+
+                        <p:tab id="tab2" title="COMPLEMENTO ">
+                            <p:row>
+                                <p:column>
+                                    <h:panelGrid columns="1" cellpadding="1" >
+
+                                        <h:outputLabel value="Complemento"/>  
+                                        <p:inputText size="30" value="#{cliente.endereco.complemento}"/>  
+                                        <h:outputLabel value="Telefone"/>  
+                                        <p:inputMask mask="(99) 9999-9999" value="#{cliente.telefone}" required="true" requiredMessage="Coloca o telefone"/>  
+                                        <h:outputLabel value="Telefone Celular"/>  
+                                        <p:inputMask mask="(99) 9999-9999" value="#{cliente.telefoneCelular}" required="true" requiredMessage="Coloca o nome completo"/>
+                                        <h:outputText value="E-mail: " />
+                                        <p:inputText value="#{cliente.email}" styleClass="inputEmail"  size="60" />
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row>
+                        </p:tab>
+                    </p:tabView>
+                    <p:separator/>
+                    <p:commandButton value="Cadastrar " action="#{controladorCliente.adicionarCliente(cliente)}"
+                                     icon="ui-icon-disk"  oncomplete="location.href='apresentarClienteCadastrado.xhtml'" />
+                    <p:commandButton value="Cancelar" oncomplete="location.href='apresentarClienteCadastrado.xhtml'"  icon="ui-icon-close">  
+                        <p:confirmDialog header="Cancelar" message="Está certo que quer sair da página?" />  
+                    </p:commandButton>  
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" > 
+                        <div style="text-align: center;">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+
+                        </div>
+                    </p:confirmDialog> 
+                </p:panel>
+            </h:form>
+            <div id="rodaPe"  align="center" >
+               Hermyson Cassiano De M. Oliveira
+                2014.1
+            </div>
+        </div>
+    </h:body>   
+</html>

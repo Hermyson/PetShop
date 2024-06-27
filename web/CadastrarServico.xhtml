@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <h:head>
+
+        <title>Cadastro de Serviço</title>
+        <script type="text/javascript" src="js/paginas.js"></script>
+        <style type="text/css" media="all">            
+            @import "CSS/geral.css";      
+        </style>
+    </h:head>
+
+    <h:body styleClass="body">
+        <div class="divGeral"> 
+
+            <!--Include do menu na página-->
+            <ui:include src="menuGeral.xhtml" />
+
+            <h:form id="formCadastroServico">
+                <p:panel header="Cadastro de Serviço">
+                    <p:tabView id="tabCiente">
+                        <p:tab id="tab1" title="DADOS SERVIÇO" >
+                            <p:growl id="gr" sticky="true" showDetail="true" life="5000" autoUpdate="true"/>
+                            <p:fieldset legend="Cadastro de Serviço" id="field" toggleSpeed="5000" toggleable="true">
+                            <strong>Cliente: </strong>#{controladorCliente.selectedC.nome}<br/>
+                            <strong>Animal: </strong>#{controladorCliente.selectedAnimal.nome_Animal}<br/>
+                            <p:separator/>
+                            <h:panelGrid id="panelGrid" columns="1" cellpadding="1" >
+                                <h:outputText value="Tipo Serviço:" />
+                                <p:selectOneMenu value="#{servico.tipo_Servico}">
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItem itemLabel="BANHO" itemValue="BANHO"/>
+                                    <f:selectItem itemLabel="TOSA" itemValue="TOSA"/>
+                                    <f:selectItem itemLabel="BANHO/TOSA" itemValue="BANHO/TOSA"/>
+                                </p:selectOneMenu>
+                                <h:outputLabel value="Descrição:"/>  
+                                <p:inputText value="#{servico.descricao}" id="descricao" size="40" disabled=""/>
+                                <h:outputText value="Valor: " />
+                                <p:inputText value="#{servico.valor}" styleClass="inputservico" title="valor" size="20"/>
+
+                                <h:outputText value="Data Serviço"/>
+                                <p:calendar value="#{servico.data_Servico}" size="10">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                <h:outputLabel value="Observação:"/>  
+                                <p:inputTextarea rows="5" cols="30"  value="#{servico.observacao}"/>
+                            </h:panelGrid>
+                            </p:fieldset>
+                        </p:tab>
+
+                    </p:tabView>
+                    <p:separator/>
+                    <p:commandButton value="Cadastrar " action="#{controladorServico.adicionar(servico)}" icon="ui-icon-disk" oncomplete="location.href='VisualizarServicoRealizado.xhtml'"/>
+                    <p:commandButton value="Cancelar" oncomplete="location.href='VisualizarServicoRealizado.xhtml'"  icon="ui-icon-close">  
+                        <p:confirmDialog header="Cancelar" message="Está certo que quer sair da página?" />  
+                    </p:commandButton>  
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" > 
+                        <div style="text-align: center;">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                        </div>
+                    </p:confirmDialog> 
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>   
+</html>
